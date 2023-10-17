@@ -1,0 +1,67 @@
+type NewCommitment @entity(immutable: true) {
+  id: Bytes!
+  token: Bytes! # address
+  commitment: BigInt! # uint256
+  leafIndex: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewNullifier @entity(immutable: true) {
+  id: Bytes!
+  token: Bytes! # address
+  nullifier: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewRelayer @entity(immutable: true) {
+  id: Bytes!
+  relayer: Bytes! # address
+  relayerMetadataUri: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewRoot @entity(immutable: true) {
+  id: Bytes!
+  token: Bytes! # address
+  root: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewTokenTree @entity(immutable: true) {
+  id: Bytes!
+  token: Bytes! # address
+  merkleTreeDepth: BigInt! # uint256
+  zeroValue: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RelayInfo @entity(immutable: true) {
+  id: Bytes!
+  sender: Bytes! # address
+  relayerInfo_registeredAddr: Bytes! # address
+  relayerInfo_feeReceiver: Bytes! # address
+  relayerInfo_feeRate: Int! # uint16
+  feeAmt: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RelayerUpdated @entity(immutable: true) {
+  id: Bytes!
+  relayer: Bytes! # address
+  newRelayerMetadataUri: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

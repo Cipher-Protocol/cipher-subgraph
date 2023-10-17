@@ -1,0 +1,655 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "verifierAddr", "type": "address" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "amount", "type": "uint256" },
+      { "internalType": "uint256", "name": "transferredAmt", "type": "uint256" }
+    ],
+    "name": "AmountInconsistent",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint32", "name": "deadline", "type": "uint32" }
+    ],
+    "name": "ExpiredDeadline",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "commitmentNum", "type": "uint256" }
+    ],
+    "name": "InvalidCommitmentNum",
+    "type": "error"
+  },
+  { "inputs": [], "name": "InvalidFeeReceiverAddr", "type": "error" },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "maxAllowableFeeRate",
+        "type": "uint16"
+      }
+    ],
+    "name": "InvalidMaxAllowableFeeRate",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "msgValue", "type": "uint256" }
+    ],
+    "name": "InvalidMsgValue",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "nullifier", "type": "uint256" }
+    ],
+    "name": "InvalidNullifier",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "nullifierNum", "type": "uint256" }
+    ],
+    "name": "InvalidNullifierNum",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint256[2]", "name": "a", "type": "uint256[2]" },
+          {
+            "internalType": "uint256[2][2]",
+            "name": "b",
+            "type": "uint256[2][2]"
+          },
+          { "internalType": "uint256[2]", "name": "c", "type": "uint256[2]" },
+          {
+            "components": [
+              { "internalType": "uint256", "name": "root", "type": "uint256" },
+              {
+                "internalType": "uint256",
+                "name": "publicInAmt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "publicOutAmt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "publicInfoHash",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "inputNullifiers",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "outputCommitments",
+                "type": "uint256[]"
+              }
+            ],
+            "internalType": "struct PublicSignals",
+            "name": "publicSignals",
+            "type": "tuple"
+          }
+        ],
+        "internalType": "struct Proof",
+        "name": "proof",
+        "type": "tuple"
+      }
+    ],
+    "name": "InvalidProof",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "publicInfoHash",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "calcPublicInfoHash",
+        "type": "uint256"
+      }
+    ],
+    "name": "InvalidPublicInfo",
+    "type": "error"
+  },
+  { "inputs": [], "name": "InvalidRecipientAddr", "type": "error" },
+  {
+    "inputs": [
+      { "internalType": "uint16", "name": "feeRate", "type": "uint16" },
+      {
+        "internalType": "uint16",
+        "name": "maxAllowableFeeRate",
+        "type": "uint16"
+      }
+    ],
+    "name": "InvalidRelayerFeeRate",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "root", "type": "uint256" }
+    ],
+    "name": "InvalidRoot",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "notRegisteredRelayerAddr",
+        "type": "address"
+      }
+    ],
+    "name": "NotRegisteredRelayer",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+    ],
+    "name": "TokenTreeAlreadyInitialized",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+    ],
+    "name": "TokenTreeNotExists",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address payable",
+        "name": "receiver",
+        "type": "address"
+      },
+      { "internalType": "uint256", "name": "amount", "type": "uint256" },
+      { "internalType": "bytes", "name": "data", "type": "bytes" }
+    ],
+    "name": "TransferNativeTokenFailed",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "commitment",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "leafIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewCommitment",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "nullifier",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewNullifier",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "relayer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "relayerMetadataUri",
+        "type": "string"
+      }
+    ],
+    "name": "NewRelayer",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "root",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewRoot",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "merkleTreeDepth",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "zeroValue",
+        "type": "uint256"
+      }
+    ],
+    "name": "NewTokenTree",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address payable",
+            "name": "registeredAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "feeReceiver",
+            "type": "address"
+          },
+          { "internalType": "uint16", "name": "feeRate", "type": "uint16" }
+        ],
+        "indexed": false,
+        "internalType": "struct RelayerInfo",
+        "name": "relayerInfo",
+        "type": "tuple"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "feeAmt",
+        "type": "uint256"
+      }
+    ],
+    "name": "RelayInfo",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "relayer",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "newRelayerMetadataUri",
+        "type": "string"
+      }
+    ],
+    "name": "RelayerUpdated",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint256[2]", "name": "a", "type": "uint256[2]" },
+          {
+            "internalType": "uint256[2][2]",
+            "name": "b",
+            "type": "uint256[2][2]"
+          },
+          { "internalType": "uint256[2]", "name": "c", "type": "uint256[2]" },
+          {
+            "components": [
+              { "internalType": "uint256", "name": "root", "type": "uint256" },
+              {
+                "internalType": "uint256",
+                "name": "publicInAmt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "publicOutAmt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "publicInfoHash",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "inputNullifiers",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "outputCommitments",
+                "type": "uint256[]"
+              }
+            ],
+            "internalType": "struct PublicSignals",
+            "name": "publicSignals",
+            "type": "tuple"
+          }
+        ],
+        "internalType": "struct Proof",
+        "name": "proof",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint16",
+            "name": "maxAllowableFeeRate",
+            "type": "uint16"
+          },
+          {
+            "internalType": "address payable",
+            "name": "recipient",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "token",
+            "type": "address"
+          },
+          { "internalType": "uint32", "name": "deadline", "type": "uint32" }
+        ],
+        "internalType": "struct PublicInfo",
+        "name": "publicInfo",
+        "type": "tuple"
+      }
+    ],
+    "name": "cipherTransact",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint256[2]", "name": "a", "type": "uint256[2]" },
+          {
+            "internalType": "uint256[2][2]",
+            "name": "b",
+            "type": "uint256[2][2]"
+          },
+          { "internalType": "uint256[2]", "name": "c", "type": "uint256[2]" },
+          {
+            "components": [
+              { "internalType": "uint256", "name": "root", "type": "uint256" },
+              {
+                "internalType": "uint256",
+                "name": "publicInAmt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "publicOutAmt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "publicInfoHash",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "inputNullifiers",
+                "type": "uint256[]"
+              },
+              {
+                "internalType": "uint256[]",
+                "name": "outputCommitments",
+                "type": "uint256[]"
+              }
+            ],
+            "internalType": "struct PublicSignals",
+            "name": "publicSignals",
+            "type": "tuple"
+          }
+        ],
+        "internalType": "struct Proof",
+        "name": "proof",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint16",
+            "name": "maxAllowableFeeRate",
+            "type": "uint16"
+          },
+          {
+            "internalType": "address payable",
+            "name": "recipient",
+            "type": "address"
+          },
+          {
+            "internalType": "contract IERC20",
+            "name": "token",
+            "type": "address"
+          },
+          { "internalType": "uint32", "name": "deadline", "type": "uint32" }
+        ],
+        "internalType": "struct PublicInfo",
+        "name": "publicInfo",
+        "type": "tuple"
+      },
+      {
+        "components": [
+          {
+            "internalType": "address payable",
+            "name": "registeredAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "address payable",
+            "name": "feeReceiver",
+            "type": "address"
+          },
+          { "internalType": "uint16", "name": "feeRate", "type": "uint16" }
+        ],
+        "internalType": "struct RelayerInfo",
+        "name": "relayerInfo",
+        "type": "tuple"
+      }
+    ],
+    "name": "cipherTransactWithRelayer",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "relayerAddr", "type": "address" }
+    ],
+    "name": "getRelayerMetadataUri",
+    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+    ],
+    "name": "getTreeDepth",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract IERC20", "name": "token", "type": "address" },
+      { "internalType": "uint256", "name": "level", "type": "uint256" }
+    ],
+    "name": "getTreeLastSubtrees",
+    "outputs": [
+      { "internalType": "uint256[2]", "name": "", "type": "uint256[2]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+    ],
+    "name": "getTreeLeafNum",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+    ],
+    "name": "getTreeRoot",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract IERC20", "name": "token", "type": "address" },
+      { "internalType": "uint256", "name": "level", "type": "uint256" }
+    ],
+    "name": "getTreeZeroes",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getVerifier",
+    "outputs": [
+      {
+        "internalType": "contract ICipherVerifier",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+    ],
+    "name": "initTokenTree",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract IERC20", "name": "token", "type": "address" },
+      { "internalType": "uint256", "name": "nullifier", "type": "uint256" }
+    ],
+    "name": "isNullified",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "contract IERC20", "name": "token", "type": "address" },
+      { "internalType": "uint256", "name": "root", "type": "uint256" }
+    ],
+    "name": "isValidRoot",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "relayerMetadataUri",
+        "type": "string"
+      }
+    ],
+    "name": "registerAsRelayer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "newRelayerMetadataUri",
+        "type": "string"
+      }
+    ],
+    "name": "updateRelayerMetadataUri",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

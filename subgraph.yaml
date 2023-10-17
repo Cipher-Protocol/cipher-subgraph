@@ -1,0 +1,42 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Cipher
+    network: goerli
+    source:
+      address: "0x60002Ea965Cf84dDb977669F6Bd8583a14c75ba7"
+      abi: Cipher
+      startBlock: 9876716
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - NewCommitment
+        - NewNullifier
+        - NewRelayer
+        - NewRoot
+        - NewTokenTree
+        - RelayInfo
+        - RelayerUpdated
+      abis:
+        - name: Cipher
+          file: ./abis/Cipher.json
+      eventHandlers:
+        - event: NewCommitment(indexed address,uint256,uint256)
+          handler: handleNewCommitment
+        - event: NewNullifier(indexed address,uint256)
+          handler: handleNewNullifier
+        - event: NewRelayer(indexed address,string)
+          handler: handleNewRelayer
+        - event: NewRoot(indexed address,uint256)
+          handler: handleNewRoot
+        - event: NewTokenTree(indexed address,uint256,uint256)
+          handler: handleNewTokenTree
+        - event: RelayInfo(address,(address,address,uint16),uint256)
+          handler: handleRelayInfo
+        - event: RelayerUpdated(indexed address,string)
+          handler: handleRelayerUpdated
+      file: ./src/cipher.ts

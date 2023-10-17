@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "Cipher": {
+      "address": "0x60002Ea965Cf84dDb977669F6Bd8583a14c75ba7",
+      "startBlock": 9876716
+    }
+  }
+}
