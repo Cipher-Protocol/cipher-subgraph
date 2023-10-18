@@ -38,8 +38,10 @@ type NewRoot @entity(immutable: true) {
 
 type NewTokenTree @entity(immutable: true) {
   id: Bytes!
+  depth: BigInt! # uint256
   token: Bytes! # address
   zeroValue: BigInt! # uint256
+  root: BigInt! # uint256
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
