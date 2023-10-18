@@ -2,7 +2,6 @@ import {
   NewCommitment as NewCommitmentEvent,
   NewNullifier as NewNullifierEvent,
   NewRelayer as NewRelayerEvent,
-  NewRoot as NewRootEvent,
   NewTokenTree as NewTokenTreeEvent,
   RelayInfo as RelayInfoEvent,
   RelayerUpdated as RelayerUpdatedEvent
@@ -22,6 +21,7 @@ export function handleNewCommitment(event: NewCommitmentEvent): void {
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.token = event.params.token
+  entity.newRoot = event.params.newRoot
   entity.commitment = event.params.commitment
   entity.leafIndex = event.params.leafIndex
 
@@ -60,27 +60,14 @@ export function handleNewRelayer(event: NewRelayerEvent): void {
   entity.save()
 }
 
-export function handleNewRoot(event: NewRootEvent): void {
-  let entity = new NewRoot(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.token = event.params.token
-  entity.root = event.params.root
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
 export function handleNewTokenTree(event: NewTokenTreeEvent): void {
   let entity = new NewTokenTree(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
   entity.token = event.params.token
-  entity.merkleTreeDepth = event.params.merkleTreeDepth
+  entity.depth = event.params.depth
   entity.zeroValue = event.params.zeroValue
+  entity.root = event.params.root
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp

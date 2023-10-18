@@ -4,7 +4,6 @@ import {
   NewCommitment,
   NewNullifier,
   NewRelayer,
-  NewRoot,
   NewTokenTree,
   RelayInfo,
   RelayerUpdated
@@ -12,6 +11,7 @@ import {
 
 export function createNewCommitmentEvent(
   token: Address,
+  newRoot: BigInt,
   commitment: BigInt,
   leafIndex: BigInt
 ): NewCommitment {
@@ -21,6 +21,13 @@ export function createNewCommitmentEvent(
 
   newCommitmentEvent.parameters.push(
     new ethereum.EventParam("token", ethereum.Value.fromAddress(token))
+  )
+
+  newCommitmentEvent.parameters.push(
+    new ethereum.EventParam(
+      "newRoot",
+      ethereum.Value.fromUnsignedBigInt(newRoot)
+    )
   )
   newCommitmentEvent.parameters.push(
     new ethereum.EventParam(
@@ -80,24 +87,8 @@ export function createNewRelayerEvent(
   return newRelayerEvent
 }
 
-export function createNewRootEvent(token: Address, root: BigInt): NewRoot {
-  let newRootEvent = changetype<NewRoot>(newMockEvent())
-
-  newRootEvent.parameters = new Array()
-
-  newRootEvent.parameters.push(
-    new ethereum.EventParam("token", ethereum.Value.fromAddress(token))
-  )
-  newRootEvent.parameters.push(
-    new ethereum.EventParam("root", ethereum.Value.fromUnsignedBigInt(root))
-  )
-
-  return newRootEvent
-}
-
 export function createNewTokenTreeEvent(
   token: Address,
-  merkleTreeDepth: BigInt,
   zeroValue: BigInt
 ): NewTokenTree {
   let newTokenTreeEvent = changetype<NewTokenTree>(newMockEvent())
@@ -106,12 +97,6 @@ export function createNewTokenTreeEvent(
 
   newTokenTreeEvent.parameters.push(
     new ethereum.EventParam("token", ethereum.Value.fromAddress(token))
-  )
-  newTokenTreeEvent.parameters.push(
-    new ethereum.EventParam(
-      "merkleTreeDepth",
-      ethereum.Value.fromUnsignedBigInt(merkleTreeDepth)
-    )
   )
   newTokenTreeEvent.parameters.push(
     new ethereum.EventParam(

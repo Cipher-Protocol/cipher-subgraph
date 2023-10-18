@@ -17,7 +17,6 @@ dataSources:
         - NewCommitment
         - NewNullifier
         - NewRelayer
-        - NewRoot
         - NewTokenTree
         - RelayInfo
         - RelayerUpdated
@@ -25,15 +24,13 @@ dataSources:
         - name: Cipher
           file: ./abis/Cipher.json
       eventHandlers:
-        - event: NewCommitment(indexed address,uint256,uint256)
+        - event: NewCommitment(indexed address,uint256,uint256,uint256)
           handler: handleNewCommitment
         - event: NewNullifier(indexed address,uint256)
           handler: handleNewNullifier
         - event: NewRelayer(indexed address,string)
           handler: handleNewRelayer
-        - event: NewRoot(indexed address,uint256)
-          handler: handleNewRoot
-        - event: NewTokenTree(indexed address,uint256,uint256)
+        - event: NewTokenTree(indexed address,uint256,uint256,uint256)
           handler: handleNewTokenTree
         - event: RelayInfo(address,(address,address,uint16),uint256)
           handler: handleRelayInfo
