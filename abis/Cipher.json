@@ -1,34 +1,74 @@
 [
   {
     "inputs": [
-      { "internalType": "address", "name": "verifierAddr", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "verifierAddr",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "poseidonT3Addr",
+        "type": "address"
+      }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "amount", "type": "uint256" },
-      { "internalType": "uint256", "name": "transferredAmt", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "transferredAmt",
+        "type": "uint256"
+      }
     ],
     "name": "AmountInconsistent",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "uint32", "name": "deadline", "type": "uint32" }
+      {
+        "internalType": "uint32",
+        "name": "deadline",
+        "type": "uint32"
+      }
     ],
     "name": "ExpiredDeadline",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "commitmentNum", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "commitmentNum",
+        "type": "uint256"
+      }
     ],
     "name": "InvalidCommitmentNum",
     "type": "error"
   },
-  { "inputs": [], "name": "InvalidFeeReceiverAddr", "type": "error" },
+  {
+    "inputs": [],
+    "name": "InvalidFeeReceiverAddr",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "value",
+        "type": "uint256"
+      }
+    ],
+    "name": "InvalidFieldValue",
+    "type": "error"
+  },
   {
     "inputs": [
       {
@@ -42,21 +82,33 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "msgValue", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "msgValue",
+        "type": "uint256"
+      }
     ],
     "name": "InvalidMsgValue",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "nullifier", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "nullifier",
+        "type": "uint256"
+      }
     ],
     "name": "InvalidNullifier",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "nullifierNum", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "nullifierNum",
+        "type": "uint256"
+      }
     ],
     "name": "InvalidNullifierNum",
     "type": "error"
@@ -65,16 +117,28 @@
     "inputs": [
       {
         "components": [
-          { "internalType": "uint256[2]", "name": "a", "type": "uint256[2]" },
+          {
+            "internalType": "uint256[2]",
+            "name": "a",
+            "type": "uint256[2]"
+          },
           {
             "internalType": "uint256[2][2]",
             "name": "b",
             "type": "uint256[2][2]"
           },
-          { "internalType": "uint256[2]", "name": "c", "type": "uint256[2]" },
+          {
+            "internalType": "uint256[2]",
+            "name": "c",
+            "type": "uint256[2]"
+          },
           {
             "components": [
-              { "internalType": "uint256", "name": "root", "type": "uint256" },
+              {
+                "internalType": "uint256",
+                "name": "root",
+                "type": "uint256"
+              },
               {
                 "internalType": "uint256",
                 "name": "publicInAmt",
@@ -130,10 +194,18 @@
     "name": "InvalidPublicInfo",
     "type": "error"
   },
-  { "inputs": [], "name": "InvalidRecipientAddr", "type": "error" },
+  {
+    "inputs": [],
+    "name": "InvalidRecipientAddr",
+    "type": "error"
+  },
   {
     "inputs": [
-      { "internalType": "uint16", "name": "feeRate", "type": "uint16" },
+      {
+        "internalType": "uint16",
+        "name": "feeRate",
+        "type": "uint16"
+      },
       {
         "internalType": "uint16",
         "name": "maxAllowableFeeRate",
@@ -145,9 +217,24 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "root", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "root",
+        "type": "uint256"
+      }
     ],
     "name": "InvalidRoot",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "treeDepth",
+        "type": "uint256"
+      }
+    ],
+    "name": "InvalidTreeDepth",
     "type": "error"
   },
   {
@@ -163,14 +250,22 @@
   },
   {
     "inputs": [
-      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      }
     ],
     "name": "TokenTreeAlreadyInitialized",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      }
     ],
     "name": "TokenTreeNotExists",
     "type": "error"
@@ -182,10 +277,34 @@
         "name": "receiver",
         "type": "address"
       },
-      { "internalType": "uint256", "name": "amount", "type": "uint256" },
-      { "internalType": "bytes", "name": "data", "type": "bytes" }
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
     ],
     "name": "TransferNativeTokenFailed",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "treeDepth",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "leafIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "TreeIsFull",
     "type": "error"
   },
   {
@@ -196,6 +315,12 @@
         "internalType": "contract IERC20",
         "name": "token",
         "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newRoot",
+        "type": "uint256"
       },
       {
         "indexed": false,
@@ -263,32 +388,19 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "root",
-        "type": "uint256"
-      }
-    ],
-    "name": "NewRoot",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "contract IERC20",
-        "name": "token",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "merkleTreeDepth",
+        "name": "depth",
         "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
         "name": "zeroValue",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "root",
         "type": "uint256"
       }
     ],
@@ -316,7 +428,11 @@
             "name": "feeReceiver",
             "type": "address"
           },
-          { "internalType": "uint16", "name": "feeRate", "type": "uint16" }
+          {
+            "internalType": "uint16",
+            "name": "feeRate",
+            "type": "uint16"
+          }
         ],
         "indexed": false,
         "internalType": "struct RelayerInfo",
@@ -356,16 +472,28 @@
     "inputs": [
       {
         "components": [
-          { "internalType": "uint256[2]", "name": "a", "type": "uint256[2]" },
+          {
+            "internalType": "uint256[2]",
+            "name": "a",
+            "type": "uint256[2]"
+          },
           {
             "internalType": "uint256[2][2]",
             "name": "b",
             "type": "uint256[2][2]"
           },
-          { "internalType": "uint256[2]", "name": "c", "type": "uint256[2]" },
+          {
+            "internalType": "uint256[2]",
+            "name": "c",
+            "type": "uint256[2]"
+          },
           {
             "components": [
-              { "internalType": "uint256", "name": "root", "type": "uint256" },
+              {
+                "internalType": "uint256",
+                "name": "root",
+                "type": "uint256"
+              },
               {
                 "internalType": "uint256",
                 "name": "publicInAmt",
@@ -418,7 +546,11 @@
             "name": "token",
             "type": "address"
           },
-          { "internalType": "uint32", "name": "deadline", "type": "uint32" }
+          {
+            "internalType": "uint32",
+            "name": "deadline",
+            "type": "uint32"
+          }
         ],
         "internalType": "struct PublicInfo",
         "name": "publicInfo",
@@ -434,16 +566,28 @@
     "inputs": [
       {
         "components": [
-          { "internalType": "uint256[2]", "name": "a", "type": "uint256[2]" },
+          {
+            "internalType": "uint256[2]",
+            "name": "a",
+            "type": "uint256[2]"
+          },
           {
             "internalType": "uint256[2][2]",
             "name": "b",
             "type": "uint256[2][2]"
           },
-          { "internalType": "uint256[2]", "name": "c", "type": "uint256[2]" },
+          {
+            "internalType": "uint256[2]",
+            "name": "c",
+            "type": "uint256[2]"
+          },
           {
             "components": [
-              { "internalType": "uint256", "name": "root", "type": "uint256" },
+              {
+                "internalType": "uint256",
+                "name": "root",
+                "type": "uint256"
+              },
               {
                 "internalType": "uint256",
                 "name": "publicInAmt",
@@ -496,7 +640,11 @@
             "name": "token",
             "type": "address"
           },
-          { "internalType": "uint32", "name": "deadline", "type": "uint32" }
+          {
+            "internalType": "uint32",
+            "name": "deadline",
+            "type": "uint32"
+          }
         ],
         "internalType": "struct PublicInfo",
         "name": "publicInfo",
@@ -514,7 +662,11 @@
             "name": "feeReceiver",
             "type": "address"
           },
-          { "internalType": "uint16", "name": "feeRate", "type": "uint16" }
+          {
+            "internalType": "uint16",
+            "name": "feeRate",
+            "type": "uint16"
+          }
         ],
         "internalType": "struct RelayerInfo",
         "name": "relayerInfo",
@@ -528,59 +680,139 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "relayerAddr", "type": "address" }
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "getHistoryRootIdx",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      }
+    ],
+    "name": "getHistoryRoots",
+    "outputs": [
+      {
+        "internalType": "uint256[32]",
+        "name": "",
+        "type": "uint256[32]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "relayerAddr",
+        "type": "address"
+      }
     ],
     "name": "getRelayerMetadataUri",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      }
     ],
     "name": "getTreeDepth",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "contract IERC20", "name": "token", "type": "address" },
-      { "internalType": "uint256", "name": "level", "type": "uint256" }
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "level",
+        "type": "uint256"
+      }
     ],
     "name": "getTreeLastSubtrees",
     "outputs": [
-      { "internalType": "uint256[2]", "name": "", "type": "uint256[2]" }
+      {
+        "internalType": "uint256[2]",
+        "name": "",
+        "type": "uint256[2]"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      }
     ],
     "name": "getTreeLeafNum",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      }
     ],
     "name": "getTreeRoot",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "contract IERC20", "name": "token", "type": "address" },
-      { "internalType": "uint256", "name": "level", "type": "uint256" }
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
     ],
-    "name": "getTreeZeroes",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -599,7 +831,11 @@
   },
   {
     "inputs": [
-      { "internalType": "contract IERC20", "name": "token", "type": "address" }
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      }
     ],
     "name": "initTokenTree",
     "outputs": [],
@@ -608,21 +844,49 @@
   },
   {
     "inputs": [
-      { "internalType": "contract IERC20", "name": "token", "type": "address" },
-      { "internalType": "uint256", "name": "nullifier", "type": "uint256" }
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "nullifier",
+        "type": "uint256"
+      }
     ],
     "name": "isNullified",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "contract IERC20", "name": "token", "type": "address" },
-      { "internalType": "uint256", "name": "root", "type": "uint256" }
+      {
+        "internalType": "contract IERC20",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "root",
+        "type": "uint256"
+      }
     ],
     "name": "isValidRoot",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
