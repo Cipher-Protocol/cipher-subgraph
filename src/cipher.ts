@@ -46,20 +46,6 @@ export function handleNewNullifier(event: NewNullifierEvent): void {
   entity.save()
 }
 
-export function handleNewRelayer(event: NewRelayerEvent): void {
-  let entity = new NewRelayer(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.relayer = event.params.relayer
-  entity.relayerMetadataUri = event.params.relayerMetadataUri
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
 export function handleNewTokenTree(event: NewTokenTreeEvent): void {
   let entity = new NewTokenTree(
     event.transaction.hash.concatI32(event.logIndex.toI32())
@@ -93,12 +79,25 @@ export function handleRelayInfo(event: RelayInfoEvent): void {
   entity.save()
 }
 
-export function handleRelayerUpdated(event: RelayerUpdatedEvent): void {
-  let entity = new RelayerUpdated(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
+export function handleNewRelayer(event: NewRelayerEvent): void {
+  const relayer = event.params.relayer
+  let entity = new NewRelayer(relayer)
   entity.relayer = event.params.relayer
-  entity.newRelayerMetadataUri = event.params.newRelayerMetadataUri
+  entity.relayerMetadataUri = event.params.relayerMetadataUri
+
+  entity.blockNumber = event.block.number
+  entity.blockTimestamp = event.block.timestamp
+  entity.transactionHash = event.transaction.hash
+
+  entity.save()
+}
+
+export function handleRelayerUpdated(event: RelayerUpdatedEvent): void {
+  const relayer = event.params.relayer
+  let entity = new NewRelayer(relayer)
+
+  entity.relayer = event.params.relayer
+  entity.relayerMetadataUri = event.params.newRelayerMetadataUri
 
   entity.blockNumber = event.block.number
   entity.blockTimestamp = event.block.timestamp

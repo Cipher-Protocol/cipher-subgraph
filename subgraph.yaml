@@ -16,8 +16,10 @@ dataSources:
       entities:
         - NewCommitment
         - NewNullifier
-        - NewRelayer
         - NewTokenTree
+        - RelayInfo
+        - NewRelayer
+        - RelayerUpdated
       abis:
         - name: Cipher
           file: ./abis/Cipher.json

@@ -18,15 +18,6 @@ type NewNullifier @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type NewRelayer @entity(immutable: true) {
-  id: Bytes!
-  relayer: Bytes! # address
-  relayerMetadataUri: String! # string
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
 type NewRoot @entity(immutable: true) {
   id: Bytes!
   token: Bytes! # address
@@ -54,6 +45,15 @@ type RelayInfo @entity(immutable: true) {
   relayerInfo_feeReceiver: Bytes! # address
   relayerInfo_feeRate: Int! # uint16
   feeAmt: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewRelayer @entity(immutable: true) {
+  id: Bytes!
+  relayer: Bytes! # address
+  relayerMetadataUri: String! # string
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
