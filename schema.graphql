@@ -18,15 +18,6 @@ type NewNullifier @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type NewRoot @entity(immutable: true) {
-  id: Bytes!
-  token: Bytes! # address
-  root: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-}
-
 type NewTokenTree @entity(immutable: true) {
   id: Bytes!
   depth: BigInt! # uint256
