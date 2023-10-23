@@ -1,8 +1,14 @@
 {
   "goerli": {
     "Cipher": {
-      "address": "0x60002Ea965Cf84dDb977669F6Bd8583a14c75ba7",
-      "startBlock": 9876716
+      "address": "0xDb1ba478F71d91CD0D55b7e852B634228d42A719",
+      "startBlock": 9910978
+    }
+  },
+  "arbitrum-goerli": {
+    "Cipher": {
+      "address": "0xDb1ba478F71d91CD0D55b7e852B634228d42A719",
+      "startBlock": 49873176
     }
   }
 }
